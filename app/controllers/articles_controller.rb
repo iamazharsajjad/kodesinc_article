@@ -59,7 +59,14 @@ class ArticlesController < ApplicationController
   end
 
   def marked_as_featured
-    
+    outcome = FeatureInteraction.run(user_id: current_user.id, featured_till: params[:featured_till], article_id: params[:article_id])
+    respond_to do |format|
+      if outcome.valid?
+        format.html { redirect_to article_url(params[:article_id]), notice: "Article was successfully updated." }
+      else
+        format.html { redirect_to article_url(params[:article_id]), notice: outcome.errors.messages }
+      end
+    end
   end
 
   private

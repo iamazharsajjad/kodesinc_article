@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+  root "articles#index"
   resources :articles do 
     patch :marked_as_featured, to: 'articles#marked_as_featured'
   end
