@@ -1,0 +1,28 @@
+<div id="<%= dom_id article %>">
+  <p>
+    <strong>Title:</strong>
+    <%= article.title %>
+  </p>
+
+  <p>
+    <strong>Body:</strong>
+    <%= article.body %>
+  </p>
+  <% if article.featured_by_id.present? %>
+    <p>
+      <strong>Featured by:</strong>
+      <%= article.featured_by_id %>
+    </p>
+
+    <p>
+      <strong>Featured till:</strong>
+      <%= article.featured_till %>
+    </p>
+  <% end %>
+
+  <%= form_tag article_marked_as_featured_path(article), method: :patch do %>
+    <%= date_field_tag :featured_till %><br>
+    <%= submit_tag "Feature This Article" %>
+  <% end %>
+
+</div>
