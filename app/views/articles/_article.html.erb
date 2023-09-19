@@ -1,28 +1,33 @@
 <div id="<%= dom_id article %>">
-  <p>
-    <strong>Title:</strong>
-    <%= article.title %>
-  </p>
+  <div class="row">
+    <div class="col-6">
+      <p>
+        <strong>Title:</strong>
+        <%= article.title %>
+      </p>
 
-  <p>
-    <strong>Body:</strong>
-    <%= article.body %>
-  </p>
-  <% if article.featured_by_id.present? %>
-    <p>
-      <strong>Featured by:</strong>
-      <%= article.featured_by_id %>
-    </p>
+      <p>
+        <strong>Body:</strong>
+        <%= article.body %>
+      </p>
+      <% if article.featured_by_id.present? %>
+        <p>
+          <strong>Featured by:</strong>
+          <%= article.featured_by_id %>
+        </p>
 
-    <p>
-      <strong>Featured till:</strong>
-      <%= article.featured_till %>
-    </p>
-  <% end %>
+        <p>
+          <strong>Featured till:</strong>
+          <%= article.featured_till %>
+        </p>
+      <% end %>
+    </div>
+    <div class="col-2">
 
-  <%= form_tag article_marked_as_featured_path(article), method: :patch do %>
-    <%= date_field_tag :featured_till %><br>
-    <%= submit_tag "Feature This Article" %>
-  <% end %>
-
+      <%= form_tag article_marked_as_featured_path(article), method: :patch do %>
+        <%= date_field_tag :featured_till,{}, value: article.featured_till,class: "form-control" %><br>
+        <%= submit_tag "Feature This Article", class:"btn btn-outline-success mt-1" %>
+      <% end %>
+    </div>
+  </div>
 </div>
